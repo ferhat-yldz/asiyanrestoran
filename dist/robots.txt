@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asiyanrestoran.vercel.app/sitemap.xml

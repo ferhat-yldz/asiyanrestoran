@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createContext, useContext } from 'react';
 import { Routes, Route, Link, NavLink, useParams, useLocation, useNavigate } from 'react-router-dom';
+import fallbackData from '../server/data.json';
 
 const Ctx = createContext();
 const useApp = () => useContext(Ctx);
@@ -581,7 +582,12 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => { fetch('/api/data').then(r => r.json()).then(setD); }, []);
+  useEffect(() => {
+    fetch('/api/data')
+      .then(r => (r.ok ? r.json() : fallbackData))
+      .then(setD)
+      .catch(() => setD(fallbackData));
+  }, []);
   useEffect(() => { document.body.classList.toggle('dark', dark); localStorage.dark = dark ? '1' : ''; }, [dark]);
   useEffect(() => { localStorage.lang = lang; }, [lang]);
   useEffect(() => { setDrawer(false); setModal(null); setSearchOpen(false); window.scrollTo(0, 0); }, [loc.pathname]);

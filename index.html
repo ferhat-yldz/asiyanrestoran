@@ -89,23 +89,14 @@
   "hasMenu": "https://asiyanrestoran.vercel.app/menu"
 }
 </script>
-<!-- Google Analytics (GA4) Altyapısı -->
+<!-- Google Etiketi (GTM-T32N64PX) -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T32N64PX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   window.gtag = gtag;
   gtag('js', new Date());
-
-  window.loadGA = function(id) {
-    if (!id || !id.trim() || document.getElementById('ga-script')) return;
-    var cleanId = id.trim();
-    var s = document.createElement('script');
-    s.id = 'ga-script';
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(cleanId);
-    document.head.appendChild(s);
-    gtag('config', cleanId, { send_page_view: true });
-  };
+  gtag('config', 'GTM-T32N64PX');
 </script>
 </head>
 <body>

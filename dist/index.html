@@ -89,7 +89,25 @@
   "hasMenu": "https://asiyanrestoran.vercel.app/menu"
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-sV2yijQq.js"></script>
+<!-- Google Analytics (GA4) Altyapısı -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+  gtag('js', new Date());
+
+  window.loadGA = function(id) {
+    if (!id || !id.trim() || document.getElementById('ga-script')) return;
+    var cleanId = id.trim();
+    var s = document.createElement('script');
+    s.id = 'ga-script';
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(cleanId);
+    document.head.appendChild(s);
+    gtag('config', cleanId, { send_page_view: true });
+  };
+</script>
+  <script type="module" crossorigin src="/assets/index-DNBeq_uf.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-5gOlIgly.css">
 </head>
 <body>

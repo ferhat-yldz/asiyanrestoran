@@ -591,6 +591,18 @@ export default function App() {
   useEffect(() => { document.body.classList.toggle('dark', dark); localStorage.dark = dark ? '1' : ''; }, [dark]);
   useEffect(() => { localStorage.lang = lang; }, [lang]);
   useEffect(() => { setDrawer(false); setModal(null); setSearchOpen(false); window.scrollTo(0, 0); }, [loc.pathname]);
+  useEffect(() => {
+    if (D?.site?.googleAnalyticsId && typeof window.loadGA === 'function') {
+      window.loadGA(D.site.googleAnalyticsId);
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'page_view', {
+          page_path: loc.pathname + loc.search,
+          page_title: document.title
+        });
+      }
+    }
+  }, [loc.pathname, D?.site?.googleAnalyticsId]);
+
   useEffect(() => { if (D) document.title = D.site.name; }, [D]);
 
   if (!D) return <p style={{ padding: 40 }}>Yükleniyor…</p>;

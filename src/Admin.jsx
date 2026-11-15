@@ -101,7 +101,8 @@ export default function Admin() {
       <div className="abox"><h3>Marka &amp; İletişim</h3><div className="ag">
         <Field k="name" l="Site adı" /><Field k="slogan" l="Slogan" /><Field k="phone1" l="Telefon 1" /><Field k="phone2" l="Telefon 2 (boş bırakılabilir)" />
         <Field k="instagram" l="Instagram kullanıcı adı" /><Field k="hours" l="Çalışma saatleri" /><Field k="branch" l="Şube etiketi" />
-        <Field k="minCart" l="Min. sepet (TL)" type="number" /><Field k="delivery" l="Teslimat süresi" /><Field k="discount" l="Web indirimi (%)" type="number" /></div>
+        <Field k="minCart" l="Min. sepet (TL)" type="number" /><Field k="delivery" l="Teslimat süresi" /><Field k="discount" l="Web indirimi (%)" type="number" />
+        <Field k="googleAnalyticsId" l="Google Analytics Ölçüm Kimliği (G-XXXXXXXXXX)" /></div>
         <Field k="address" l="Adres / Konum (içinde 'henüz' geçerse harita gizlenir)" area /><Field k="payments" l="Ödeme yöntemleri" area />
         <div className="ag"><Img k="logo" l="Logo" /><Img k="heroImage" l="Anasayfa kapak fotoğrafı" /><Img k="menuBanner" l="Menü kapak fotoğrafı" /></div></div>
       <div className="abox"><h3>Kampanya Bandı</h3><Field k="promoTitle" l="Başlık" /><Field k="promoText" l="Açıklama" area /></div></>,

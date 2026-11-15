@@ -45,7 +45,8 @@
       "/uploads/asiyan-anasayfa.png",
       "/uploads/pirzola-kusbasi-karisik.png"
     ],
-    "menuBanner": "/uploads/menu-banner.png"
+    "menuBanner": "/uploads/menu-banner.png",
+    "googleAnalyticsId": ""
   },
   "categories": [
     {

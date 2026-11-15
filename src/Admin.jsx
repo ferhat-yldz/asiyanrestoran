@@ -25,14 +25,34 @@ export default function Admin() {
   const [u, setU] = useState('admin'), [pw, setPw] = useState('');
   const [toast, setToast] = useState('');
   const [pf, setPf] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [dbStatus, setDbStatus] = useState('');
   const H = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token };
 
   useEffect(() => {
     if (!token) return;
-    fetch('/api/data')
+    fetch('/api/data', { cache: 'no-store' })
       .then(r => (r.ok ? r.json() : fallbackData))
-      .then(setD)
-      .catch(() => setD(fallbackData));
+      .then(data => {
+        const local = localStorage.getItem('asiyan_local_data');
+        if (local && (!data || !data.site)) {
+          try {
+            setD(JSON.parse(local));
+            return;
+          } catch (e) {}
+        }
+        setD(data);
+      })
+      .catch(() => {
+        const local = localStorage.getItem('asiyan_local_data');
+        if (local) {
+          try {
+            setD(JSON.parse(local));
+            return;
+          } catch (e) {}
+        }
+        setD(fallbackData);
+      });
   }, [token]);
 
   const login = async () => {
@@ -64,10 +84,40 @@ export default function Admin() {
 
     setErr('Hatalı giriş');
   };
+
   const save = async () => {
-    const r = await fetch('/api/data', { method: 'PUT', headers: H, body: JSON.stringify(D) });
-    if (r.status === 401) { alert('Oturum süresi doldu'); setToken(''); return; }
-    setToast('Kaydedildi ✓'); setTimeout(() => setToast(''), 1800);
+    setSaving(true);
+    try {
+      localStorage.setItem('asiyan_local_data', JSON.stringify(D));
+      const r = await fetch('/api/data', {
+        method: 'PUT',
+        headers: H,
+        body: JSON.stringify(D)
+      });
+      if (r.status === 401) {
+        alert('Oturum süresi doldu, lütfen tekrar giriş yapın.');
+        setToken('');
+        setSaving(false);
+        return;
+      }
+      const res = await r.json().catch(() => ({}));
+      if (res.storage === 'vercel-kv') {
+        setDbStatus('kv');
+        setToast('Canlı Veritabanına Kaydedildi ✓');
+      } else if (res.warning) {
+        setToast('Kaydedildi (KV Bağlantısı Bekleniyor)');
+        alert(res.warning);
+      } else {
+        setToast('Kaydedildi ✓');
+      }
+      setTimeout(() => setToast(''), 3000);
+    } catch (e) {
+      localStorage.setItem('asiyan_local_data', JSON.stringify(D));
+      setToast('Tarayıcıya Kaydedildi ✓');
+      setTimeout(() => setToast(''), 2500);
+    } finally {
+      setSaving(false);
+    }
   };
   const upload = cb => {
     const i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*,video/mp4';
@@ -148,8 +198,11 @@ export default function Admin() {
 
   return (
     <AC.Provider value={ctx}><div className="adm">
-      <header><div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><img src="/uploads/restoranlogo.jpeg" alt="" style={{ height: 32, borderRadius: 6 }} /><b>Aşiyan Yönetim Paneli</b></div><span><a href="/" target="_blank" rel="noreferrer" style={{ color: '#fdba74' }}>Siteyi gör</a> &nbsp;
-        <button className="ab p" onClick={save}>💾 Kaydet</button> <button className="ab" onClick={() => { localStorage.at = ''; setToken(''); }}>Çıkış</button></span></header>
+      <header><div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><img src="/uploads/restoranlogo.jpeg" alt="" style={{ height: 32, borderRadius: 6 }} /><b>Aşiyan Yönetim Paneli</b>
+        {dbStatus === 'kv' && <span style={{ fontSize: 11, background: '#16a34a', color: '#fff', padding: '2px 8px', borderRadius: 12 }}>● Canlı KV Aktif</span>}
+      </div><span><a href="/" target="_blank" rel="noreferrer" style={{ color: '#fdba74' }}>Siteyi gör ↗</a> &nbsp;
+        <button className="ab p" onClick={save} disabled={saving}>{saving ? '⏳ Kaydediliyor...' : '💾 Kaydet'}</button> &nbsp;
+        <button className="ab" onClick={() => { localStorage.at = ''; setToken(''); }}>Çıkış</button></span></header>
       <nav>{tabs.map(([k, n]) => <button key={k} className={k === tab ? 'on' : ''} onClick={() => setTab(k)}>{n}</button>)}</nav>
       <main>{views[tab]}</main>
       {toast && <div className="toast">{toast}</div>}

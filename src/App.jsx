@@ -583,10 +583,28 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    fetch('/api/data')
+    fetch('/api/data', { cache: 'no-store' })
       .then(r => (r.ok ? r.json() : fallbackData))
-      .then(setD)
-      .catch(() => setD(fallbackData));
+      .then(data => {
+        const local = localStorage.getItem('asiyan_local_data');
+        if (local && (!data || !data.site)) {
+          try {
+            setD(JSON.parse(local));
+            return;
+          } catch (e) {}
+        }
+        setD(data);
+      })
+      .catch(() => {
+        const local = localStorage.getItem('asiyan_local_data');
+        if (local) {
+          try {
+            setD(JSON.parse(local));
+            return;
+          } catch (e) {}
+        }
+        setD(fallbackData);
+      });
   }, []);
   useEffect(() => { document.body.classList.toggle('dark', dark); localStorage.dark = dark ? '1' : ''; }, [dark]);
   useEffect(() => { localStorage.lang = lang; }, [lang]);

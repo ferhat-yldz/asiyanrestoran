@@ -1,0 +1,415 @@
+{
+ "site": {
+  "name": "Aşiyan Kebap",
+  "slogan": "Közün ateşi. Sofranın keyfi.",
+  "badge": "KÖZDEN SOFRAYA · ADANA USTALIĞI",
+  "heroTitle": "ADANA LEZZETİ,",
+  "heroItalic": "sofranıza en sıcak hâliyle gelir",
+  "heroText": "Usta ellerde hazırlanan kebaplar, taptaze malzemeler ve aile sıcaklığında bir restoran deneyimi.",
+  "heroImage": "",
+  "logo": "",
+  "discount": 10,
+  "promoTitle": "Web’den siparişinize özel %10 indirim",
+  "promoText": "Her müşteriye, her siparişte. Kupon gerekmez, kullanım sınırı yok. · Asya Katmer kampanya dışındadır.",
+  "phone1": "+903222120003",
+  "phone2": "+903222120000",
+  "address": "Güzelyalı Mah. Turgut Özal Blv., Dr. İbrahim Keskin Sk. 52/B, Çukurova / Adana",
+  "instagram": "asiyankebap",
+  "hours": "10:00 – 02:00",
+  "branch": "Çukurova · Merkez",
+  "minCart": 250,
+  "delivery": "35-45 dk",
+  "payments": "Kapıda Nakit, Kapıda Kredi Kartı, Online Kredi Kartı, Sodexo, Multinet, Ticket Restaurant, Setcard, Metropol",
+  "aboutTitle": "Közün başında geçen yıllar, sofrada buluşan dostluklar",
+  "about1": "Aşiyan Kebap olarak, Adana’nın köklü kebap kültürünü modern bir restoran anlayışıyla buluşturuyoruz. Ateşin başında geçen her dakika, sofranıza gelen her tabak; bu topraklara olan sevgimizin ve mesleğimize duyduğumuz saygının bir göstergesi.",
+  "about2": "Bizim için kebap sadece bir yemek değil; dostların bir araya geldiği, sohbetin koyulaştığı, anıların paylaşıldığı bir gelenek. Turgut Özal Bulvarı’ndaki adresimizde, bu geleneği ilk günkü heyecanla yaşatmaya devam ediyoruz.",
+  "aboutImage": "",
+  "venueTitle": "Aileniz ve sevdiklerinizle huzurlu bir sofra",
+  "venueText": "Geniş ve ferah salonumuz, aile yemeklerinden iş toplantılarına kadar her türlü buluşma için özenle tasarlandı. Çocuklu aileler için rahat bir ortam, güler yüzlü personel ve hızlı servis ile kendinizi evinizde hissedeceksiniz.",
+  "venueList": "Geniş ve ferah oturma alanları\nAçık ve kapalı salon seçenekleri\nHızlı ve sıcak paket servis ağı\nOtopark ve vale kolaylığı",
+  "rules": [
+   {
+    "title": "Et Seçimi",
+    "text": "Sadece özenle seçilmiş yerli besi kuzu eti kullanıyoruz. Zırh kıyması, doğru yağ oranı ve dinlendirme; lezzetimizin temelidir."
+   },
+   {
+    "title": "Meşe Kömürü",
+    "text": "Kebaplarımız sadece hakiki meşe kömürü ateşinde pişer. Közün sıcaklığı, etin suyunu içine hapseder ve eşsiz duman aromasını verir."
+   },
+   {
+    "title": "Bol İkram",
+    "text": "Adana sofrası cömerttir. Siparişinizin yanında sıcacık pide, taptaze ezme, soğan salatası ve mevsim yeşillikleri her zaman sofranızdadır."
+   }
+  ]
+ },
+ "categories": [
+  {
+   "id": "izgaralar",
+   "name": "Izgaralar"
+  },
+  {
+   "id": "firin",
+   "name": "Fırın Çeşitleri"
+  },
+  {
+   "id": "tavuk",
+   "name": "Tavuk Çeşitleri"
+  },
+  {
+   "id": "durumler",
+   "name": "Dürümler"
+  },
+  {
+   "id": "special",
+   "name": "Specıal"
+  },
+  {
+   "id": "makarnalar",
+   "name": "Makarnalar"
+  },
+  {
+   "id": "tugla",
+   "name": "Tuğla Çeşitleri"
+  },
+  {
+   "id": "humuslar",
+   "name": "Humuslar"
+  },
+  {
+   "id": "cig-kofteler",
+   "name": "Çiğ Köfteler"
+  },
+  {
+   "id": "pizzalar",
+   "name": "Pizzalar"
+  },
+  {
+   "id": "mezeler",
+   "name": "Mezeler"
+  },
+  {
+   "id": "icecekler",
+   "name": "İçecekler"
+  },
+  {
+   "id": "katmer",
+   "name": "Asya Katmer"
+  }
+ ],
+ "products": [
+  {
+   "id": "p1",
+   "cat": "izgaralar",
+   "name": "Adana Kebap (175 gr.)",
+   "price": 690,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": true,
+   "featured": true,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p2",
+   "cat": "izgaralar",
+   "name": "Kuşbaşı (220 gr.)",
+   "price": 740,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": true,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p3",
+   "cat": "izgaralar",
+   "name": "Ciğer Şiş (220 gr.)",
+   "price": 740,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": true,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p4",
+   "cat": "izgaralar",
+   "name": "Kuzu Çöp Şiş (220 gr.)",
+   "price": 740,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": true,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p5",
+   "cat": "izgaralar",
+   "name": "Kaburga Kemikli (400 gr.)",
+   "price": 750,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": true,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p6",
+   "cat": "izgaralar",
+   "name": "Kaburga Kemiksiz (300 gr.)",
+   "price": 750,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": true,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p7",
+   "cat": "izgaralar",
+   "name": "Karışık Izgara (600 gr.)",
+   "price": 1400,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": true,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p8",
+   "cat": "izgaralar",
+   "name": "Kiremitte Pirzola",
+   "price": 1100,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": true,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p9",
+   "cat": "tavuk",
+   "name": "Tavuk Şiş Göğüs",
+   "price": 670,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": true,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p10",
+   "cat": "durumler",
+   "name": "Kaburga Dürüm",
+   "price": 600,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": true,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p11",
+   "cat": "firin",
+   "name": "Fındık Lahmacun",
+   "price": 600,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": true,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p12",
+   "cat": "humuslar",
+   "name": "Pastırma Kaşarlı Humus",
+   "price": 350,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": true,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p13",
+   "cat": "humuslar",
+   "name": "Pastırmalı Humus",
+   "price": 350,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p14",
+   "cat": "humuslar",
+   "name": "Kaşarlı Sucuklu Humus",
+   "price": 350,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p15",
+   "cat": "mezeler",
+   "name": "Köz Tabağı",
+   "price": 450,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p16",
+   "cat": "mezeler",
+   "name": "Izgara Mantar Porsiyon",
+   "price": 400,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p17",
+   "cat": "mezeler",
+   "name": "Patates Kızartması",
+   "price": 200,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p18",
+   "cat": "icecekler",
+   "name": "Uludağ Limonata",
+   "price": 100,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "p19",
+   "cat": "icecekler",
+   "name": "Taze Sıkılmış Portakal Suyu",
+   "price": 150,
+   "desc": "İçindekiler: Soğan salatası, mevsim salata, acılı ezme, cacık, kaymaklı kadayıf, ızgara mantar, közlenmiş domates, közlenmiş biber, yeşillik, fındık lahmacun, pide ekmeği, köri soslu makarna",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": true,
+   "active": true
+  },
+  {
+   "id": "k1",
+   "cat": "katmer",
+   "name": "Klasik Katmer (2 Kişilik)",
+   "price": 850,
+   "desc": "Asya Katmer lezzeti.",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": false,
+   "active": true
+  },
+  {
+   "id": "k2",
+   "cat": "katmer",
+   "name": "Muska Katmer Kaymaklı",
+   "price": 450,
+   "desc": "Asya Katmer lezzeti.",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": false,
+   "active": true
+  },
+  {
+   "id": "k3",
+   "cat": "katmer",
+   "name": "Burma Katmer",
+   "price": 450,
+   "desc": "Asya Katmer lezzeti.",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": false,
+   "active": true
+  },
+  {
+   "id": "k4",
+   "cat": "katmer",
+   "name": "Üzeri Çikolatalı Klasik Katmer",
+   "price": 900,
+   "desc": "Asya Katmer lezzeti.",
+   "image": "",
+   "signature": false,
+   "featured": false,
+   "discount": false,
+   "active": true
+  }
+ ],
+ "gallery": [
+  {
+   "title": "Adana kebap sofrası",
+   "image": ""
+  },
+  {
+   "title": "Karışık ızgara",
+   "image": ""
+  },
+  {
+   "title": "Köz ciğer şiş",
+   "image": ""
+  },
+  {
+   "title": "Kuzu şiş",
+   "image": ""
+  },
+  {
+   "title": "Ali Nazik",
+   "image": ""
+  },
+  {
+   "title": "Dürüm ve fındık lahmacun",
+   "image": ""
+  },
+  {
+   "title": "Kuzu pirzola tabağı",
+   "image": ""
+  },
+  {
+   "title": "Tavuk şiş",
+   "image": ""
+  },
+  {
+   "title": "Közde ciğer",
+   "image": ""
+  }
+ ]
+}

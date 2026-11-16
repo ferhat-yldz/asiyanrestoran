@@ -9,6 +9,10 @@ export const config = {
   }
 };
 
+const REPO_OWNER = 'ferhat-yldz';
+const REPO_NAME = 'asiyanrestoran';
+const FILE_PATH = 'server/data.json';
+
 const getLocalData = () => {
   try {
     const dataPath = path.join(process.cwd(), 'server', 'data.json');
@@ -26,15 +30,13 @@ const getLocalData = () => {
 };
 
 export default async function handler(req, res) {
-  // CORS & caching headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
 
+  const githubToken = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
   const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
   const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
 
@@ -43,6 +45,29 @@ export default async function handler(req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
 
+    // 1. Önce GitHub API üzerinden en güncel dosyayı çekmeyi dene
+    if (githubToken) {
+      try {
+        const ghRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+          headers: {
+            Authorization: `Bearer ${githubToken}`,
+            Accept: 'application/vnd.github.v3+json',
+            'User-Agent': 'AsiyanRestoran-App'
+          }
+        });
+        if (ghRes.ok) {
+          const ghJson = await ghRes.json();
+          if (ghJson.content) {
+            const decoded = Buffer.from(ghJson.content, 'base64').toString('utf-8');
+            return res.status(200).json(JSON.parse(decoded));
+          }
+        }
+      } catch (err) {
+        console.error('GitHub GET error:', err);
+      }
+    }
+
+    // 2. Vercel KV varsa oradan çek
     if (kvUrl && kvToken) {
       try {
         const kvRes = await fetch(`${kvUrl}/get/asiyan_data`, {
@@ -55,26 +80,12 @@ export default async function handler(req, res) {
             return res.status(200).json(data);
           }
         }
-
-        // KV boş ise yerel veriyi alıp KV'ye tohumlayalım (otomatik seed)
-        const initial = getLocalData();
-        if (initial) {
-          await fetch(`${kvUrl}/set/asiyan_data`, {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${kvToken}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(JSON.stringify(initial))
-          });
-          return res.status(200).json(initial);
-        }
       } catch (err) {
         console.error('KV GET error:', err);
       }
     }
 
-    // KV yoksa veya hata verdiyse yerel data.json'u dön
+    // 3. Fallback: Yerel server/data.json
     const local = getLocalData();
     if (local) return res.status(200).json(local);
 
@@ -90,12 +101,59 @@ export default async function handler(req, res) {
 
     const body = req.body;
     if (!body) return res.status(400).json({ error: 'Veri boş' });
-    const payloadStr = typeof body === 'string' ? body : JSON.stringify(body);
+    const payloadStr = typeof body === 'string' ? body : JSON.stringify(body, null, 2);
 
-    let savedToKv = false;
+    let savedToGithub = false;
+
+    // 1. GitHub API ile doğrudan depoya commit atma
+    if (githubToken) {
+      try {
+        // Mevcut dosyanın SHA değerini öğren
+        let sha = null;
+        const checkRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+          headers: {
+            Authorization: `Bearer ${githubToken}`,
+            Accept: 'application/vnd.github.v3+json',
+            'User-Agent': 'AsiyanRestoran-App'
+          }
+        });
+        if (checkRes.ok) {
+          const checkJson = await checkRes.json();
+          sha = checkJson.sha;
+        }
+
+        // Dosyayı GitHub'da güncelle
+        const putRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${githubToken}`,
+            'Content-Type': 'application/json',
+            Accept: 'application/vnd.github.v3+json',
+            'User-Agent': 'AsiyanRestoran-App'
+          },
+          body: JSON.stringify({
+            message: 'Yönetim Paneli: Menü ve ayarlar güncellendi',
+            content: Buffer.from(payloadStr).toString('base64'),
+            sha: sha,
+            branch: 'main'
+          })
+        });
+
+        if (putRes.ok) {
+          savedToGithub = true;
+        } else {
+          const errBody = await putRes.text();
+          console.error('GitHub PUT failed:', putRes.status, errBody);
+        }
+      } catch (err) {
+        console.error('GitHub PUT error:', err);
+      }
+    }
+
+    // 2. Vercel KV varsa oraya da yaz
     if (kvUrl && kvToken) {
       try {
-        const kvRes = await fetch(`${kvUrl}/set/asiyan_data`, {
+        await fetch(`${kvUrl}/set/asiyan_data`, {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${kvToken}`,
@@ -103,36 +161,35 @@ export default async function handler(req, res) {
           },
           body: JSON.stringify(payloadStr)
         });
-        if (kvRes.ok) {
-          savedToKv = true;
-        } else {
-          console.error('KV SET failed:', await kvRes.text());
-        }
-      } catch (err) {
-        console.error('KV PUT error:', err);
-      }
+      } catch (err) {}
     }
 
-    // Yerel dosya sistemine yazmayı dene (lokal ortamda ise kalıcı olsun)
+    // 3. Yerel diske de yazmayı dene
     try {
       const dataPath = path.join(process.cwd(), 'server', 'data.json');
       fs.writeFileSync(dataPath, payloadStr, 'utf-8');
-    } catch (e) {
-      // Vercel read-only filesystem'de beklenen durum
+    } catch (e) {}
+
+    if (savedToGithub) {
+      return res.status(200).json({
+        ok: true,
+        storage: 'github',
+        message: 'Değişiklikler doğrudan GitHub deponuza kaydedildi ve canlıya aktarılıyor.'
+      });
     }
 
-    if (savedToKv) {
+    if (kvUrl && kvToken) {
       return res.status(200).json({
         ok: true,
         storage: 'vercel-kv',
-        message: 'Değişiklikler canlı Vercel KV veritabanına başarıyla kaydedildi.'
+        message: 'Değişiklikler KV veritabanına kaydedildi.'
       });
     }
 
     return res.status(200).json({
       ok: true,
       storage: 'ephemeral',
-      warning: 'Vercel KV deposu henüz bağlanmadı. Canlı sitede değişikliklerin kalıcı olması için Vercel panelinden "Storage > KV" aktif edilmelidir.'
+      warning: 'GitHub Token henüz Vercel\'e eklenmedi. Verilerin kalıcı olması için Vercel Environment Variables kısmına GITHUB_TOKEN eklenmelidir.'
     });
   }
 

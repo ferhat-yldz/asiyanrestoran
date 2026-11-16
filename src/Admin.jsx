@@ -101,11 +101,14 @@ export default function Admin() {
         return;
       }
       const res = await r.json().catch(() => ({}));
-      if (res.storage === 'vercel-kv') {
+      if (res.storage === 'github') {
+        setDbStatus('github');
+        setToast('GitHub Deposuna Kaydedildi ✓');
+      } else if (res.storage === 'vercel-kv') {
         setDbStatus('kv');
         setToast('Canlı Veritabanına Kaydedildi ✓');
       } else if (res.warning) {
-        setToast('Kaydedildi (KV Bağlantısı Bekleniyor)');
+        setToast('Kaydedildi (Bağlantı Bekleniyor)');
         alert(res.warning);
       } else {
         setToast('Kaydedildi ✓');
@@ -199,7 +202,7 @@ export default function Admin() {
   return (
     <AC.Provider value={ctx}><div className="adm">
       <header><div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><img src="/uploads/restoranlogo.jpeg" alt="" style={{ height: 32, borderRadius: 6 }} /><b>Aşiyan Yönetim Paneli</b>
-        {dbStatus === 'kv' && <span style={{ fontSize: 11, background: '#16a34a', color: '#fff', padding: '2px 8px', borderRadius: 12 }}>● Canlı KV Aktif</span>}
+        {dbStatus && <span style={{ fontSize: 11, background: '#16a34a', color: '#fff', padding: '2px 8px', borderRadius: 12 }}>● Canlı Senkron ({dbStatus.toUpperCase()})</span>}
       </div><span><a href="/" target="_blank" rel="noreferrer" style={{ color: '#fdba74' }}>Siteyi gör ↗</a> &nbsp;
         <button className="ab p" onClick={save} disabled={saving}>{saving ? '⏳ Kaydediliyor...' : '💾 Kaydet'}</button> &nbsp;
         <button className="ab" onClick={() => { localStorage.at = ''; setToken(''); }}>Çıkış</button></span></header>

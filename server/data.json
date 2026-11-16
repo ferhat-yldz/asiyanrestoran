@@ -302,18 +302,6 @@
       "featured": false,
       "discount": true,
       "active": true
-    },
-    {
-      "id": "k3",
-      "cat": "katmer",
-      "name": "Burma Katmer",
-      "price": 450,
-      "desc": "Asya Katmer lezzeti.",
-      "image": "/uploads/7bc7213c4f76.webp",
-      "signature": false,
-      "featured": false,
-      "discount": false,
-      "active": true
     }
   ],
   "gallery": [

@@ -2,7 +2,7 @@
 import fallbackData from '../server/data.json';
 
 const esc = s => s ?? '';
-const tabs = [['site', 'Genel Ayarlar'], ['texts', 'Sayfa Metinleri'], ['categories', 'Menü Kategorileri'], ['products', 'Ürünler'], ['gallery', 'Fotoğraf Galerisi']];
+const tabs = [['site', 'Genel Ayarlar'], ['texts', 'Sayfa Metinleri'], ['categories', 'Menü Kategorileri'], ['products', 'Ürünler'], ['gallery', 'Fotoğraf Galerisi'], ['qr', '📱 Masa QR Menü']];
 
 const AC = React.createContext();
 function Field({ k, l, type = 'text', area }) {
@@ -196,7 +196,49 @@ export default function Admin() {
         <button className="ab" onClick={() => upload(url => upd(n => { n.gallery[i].image = url; }))}>📤 Yükle</button>
         <label>Başlık</label><input value={g.title} onChange={e => upd(n => { n.gallery[i].title = e.target.value; })} /><br />
         <div className="arow"><button className="ab" onClick={() => mv('gallery', i, -1)}>↑</button><button className="ab" onClick={() => mv('gallery', i, 1)}>↓</button>
-          <button className="ab r" onClick={() => upd(n => { n.gallery.splice(i, 1); })}>Sil</button></div></div>)}</div></>
+          <button className="ab r" onClick={() => upd(n => { n.gallery.splice(i, 1); })}>Sil</button></div></div>)}</div></>,
+    qr: <div className="abox" style={{ maxWidth: 640 }}>
+      <h3>Masa QR Menü Sistemi</h3>
+      <p style={{ color: '#a8a29e', marginBottom: 20 }}>
+        Müşteriler masalardaki QR kodu telefonlarının kamerasıyla okuttuklarında doğrudan canlı web menünüze yönlendirilir.
+      </p>
+
+      <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap', background: 'rgba(255,255,255,0.03)', padding: 20, borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ background: '#fff', padding: 12, borderRadius: 12, display: 'inline-block' }}>
+          <img src="/uploads/asiyan-menu-qr.png" alt="Aşiyan Menü QR" style={{ width: 180, height: 180, display: 'block' }} />
+        </div>
+
+        <div style={{ flex: 1, minWidth: 240 }}>
+          <div style={{ marginBottom: 12 }}>
+            <span style={{ fontSize: 12, color: '#a8a29e' }}>Hedef Menü Bağlantısı:</span><br />
+            <a href="https://asiyanrestoran.com/menu?ref=qr" target="_blank" rel="noreferrer" style={{ color: '#f87171', fontWeight: 600, wordBreak: 'break-all' }}>
+              https://asiyanrestoran.com/menu?ref=qr
+            </a>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <a href="/masa-qr-kart.html" target="_blank" rel="noreferrer" className="ab p" style={{ textAlign: 'center', textDecoration: 'none', padding: '10px 16px' }}>
+              🖨️ Hazır Masa Kartını Aç &amp; Yazdır (A6)
+            </a>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <a href="/uploads/asiyan-menu-qr.png" download="asiyan-menu-qr.png" className="ab" style={{ flex: 1, textAlign: 'center', textDecoration: 'none' }}>
+                📥 PNG İndir
+              </a>
+              <a href="/uploads/asiyan-menu-qr.svg" download="asiyan-menu-qr.svg" className="ab" style={{ flex: 1, textAlign: 'center', textDecoration: 'none' }}>
+                📐 SVG İndir (Matbaa)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ marginTop: 24, padding: 16, background: 'rgba(220, 38, 38, 0.08)', borderRadius: 10, border: '1px solid rgba(220, 38, 38, 0.2)' }}>
+        <b style={{ color: '#f87171' }}>💡 Restoran Masaları İçin Tavsiye:</b>
+        <p style={{ fontSize: 13, color: '#d6d3d1', marginTop: 6, lineHeight: 1.5 }}>
+          "Hazır Masa Kartını Aç &amp; Yazdır" butonuna tıklayarak açılan şık siyah-altın tasarımlı kartı yazdırıp şeffaf pleksi masa standlarına (10x15 cm) yerleştirebilir veya SVG dosyasını doğrudan reklamcıya/matbaaya gönderebilirsiniz.
+        </p>
+      </div>
+    </div>
   };
 
   return (

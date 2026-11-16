@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext, useContext } from 'react';
-import { Routes, Route, Link, NavLink, useParams, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, NavLink, useParams, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import fallbackData from '../server/data.json';
 
 const Ctx = createContext();
@@ -691,6 +691,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/menu/:cat" element={<Menu />} />
+          <Route path="/qr" element={<Navigate to="/menu?ref=qr" replace />} />
           <Route path="/hakkimizda" element={<About />} />
           <Route path="/galeri" element={<Gallery />} />
           <Route path="/iletisim" element={<Contact />} />
